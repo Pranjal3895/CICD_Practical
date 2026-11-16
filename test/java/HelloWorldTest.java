@@ -24,7 +24,6 @@ public class HelloWorldTest {
         }
 
         String result = output.toString().trim();
-
         String[] lines = result.split("\\R");
 
         assertEquals(10, lines.length);

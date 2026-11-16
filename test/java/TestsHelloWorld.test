@@ -1,5 +1,36 @@
-package test.java;
 
-public class TestsHelloWorld {
-    
+import org.junit.jupiter.api.Test;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+public class HelloWorldTest {
+
+    @Test
+    public void testHelloWorldOutput() {
+
+        ByteArrayOutputStream output =
+            new ByteArrayOutputStream();
+
+        PrintStream original = System.out;
+
+        System.setOut(new PrintStream(output));
+
+        try {
+            HelloWorld.main(new String[]{});
+        } finally {
+            System.setOut(original);
+        }
+
+        String result = output.toString().trim();
+
+        String[] lines = result.split("\\R");
+
+        assertEquals(10, lines.length);
+
+        for (String line : lines) {
+            assertEquals("Hello World", line);
+        }
+    }
 }
